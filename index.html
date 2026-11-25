@@ -245,6 +245,27 @@
         padding: 24px;
       }
 
+      .calculator-wrap {
+        max-width: 680px;
+        margin: 0 auto;
+        border: 3px solid var(--teal);
+        border-radius: 24px;
+        padding: 24px;
+      }
+
+      .calculator-form {
+        display: grid;
+        gap: 16px;
+      }
+
+      .calculator-result {
+        margin: 0;
+        border-radius: 16px;
+        padding: 18px;
+        background: var(--saffron);
+        font-weight: 800;
+      }
+
       .order-form {
         display: grid;
         gap: 16px;
@@ -290,6 +311,14 @@
       @media (min-width: 720px) {
         .hero-grid {
           grid-template-columns: 1.2fr 0.8fr;
+        }
+
+        .calculator-form {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .calculator-result {
+          grid-column: 1 / -1;
         }
 
         .menu-grid {
@@ -389,6 +418,24 @@
         </div>
       </section>
 
+      <section id="group-calculator">
+        <div class="container calculator-wrap">
+          <h2 class="section-heading">Split the chai bill</h2>
+          <p>After 9 pm, every third matka is free.</p>
+          <form class="calculator-form" id="calculator-form">
+            <label>
+              People
+              <input type="number" name="people" min="1" step="1" value="2" required />
+            </label>
+            <label>
+              Number of matkas
+              <input type="number" name="matkas" min="1" step="1" value="2" required />
+            </label>
+            <p class="calculator-result" id="calculator-result" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
       <section class="about">
         <div class="container">
           <h2 class="section-heading">Late-night chai</h2>
@@ -451,6 +498,40 @@
       const form = document.querySelector("#order-form");
       const phoneInput = form.elements.phone;
       const message = document.querySelector("#form-message");
+      const calculatorForm = document.querySelector("#calculator-form");
+      const calculatorResult = document.querySelector("#calculator-result");
+
+      function updateGroupTotal() {
+        const people = calculatorForm.elements.people.valueAsNumber;
+        const matkas = calculatorForm.elements.matkas.valueAsNumber;
+
+        if (
+          !Number.isSafeInteger(people) ||
+          people < 1 ||
+          !Number.isSafeInteger(matkas) ||
+          matkas < 1 ||
+          matkas > Math.floor(Number.MAX_SAFE_INTEGER / 200)
+        ) {
+          calculatorResult.textContent = "Enter a whole number of people and matkas.";
+          return;
+        }
+
+        const freeMatkas = Math.floor(matkas / 3);
+        const total = (matkas - freeMatkas) * 200;
+        const share = Math.floor(total / people);
+        const extraRupeeShares = total % people;
+        const split = extraRupeeShares
+          ? `PKR ${share} each; ${extraRupeeShares} ${extraRupeeShares === 1 ? "person pays" : "people pay"} PKR ${share + 1}.`
+          : `PKR ${share} each.`;
+        const offer = freeMatkas
+          ? `${freeMatkas} ${freeMatkas === 1 ? "matka" : "matkas"} free.`
+          : "No free matka yet.";
+
+        calculatorResult.textContent = `Group total: PKR ${total}. ${offer} Split: ${split}`;
+      }
+
+      calculatorForm.addEventListener("input", updateGroupTotal);
+      updateGroupTotal();
 
       phoneInput.addEventListener("input", () => {
         phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 11);
