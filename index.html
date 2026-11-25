@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nau Kay Baad</title>
+    <style>
+      :root {
+        --cream: #fff8e7;
+        --teal: #0f4c5c;
+        --saffron: #f4a300;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--teal);
+        font-family: system-ui, sans-serif;
+        line-height: 1.5;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin-top: 0;
+        font-family: Georgia, serif;
+      }
+
+      a {
+        color: var(--teal);
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 32px));
+        margin-inline: auto;
+      }
+
+      .nav {
+        position: relative;
+        z-index: 10;
+        border-bottom: 3px solid var(--teal);
+        background: var(--cream);
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 68px;
+      }
+
+      .nav-brand {
+        font-family: Georgia, serif;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 16px;
+      }
+
+      .nav-links a {
+        font-weight: 800;
+        text-decoration-thickness: 3px;
+        text-decoration-color: var(--saffron);
+      }
+
+      .hero {
+        min-height: 680px;
+        display: grid;
+        align-items: center;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 80% 20%, var(--saffron) 0 4px, transparent 5px),
+          radial-gradient(circle at 88% 72%, var(--saffron) 0 3px, transparent 4px);
+      }
+
+      .hero-grid {
+        display: grid;
+        gap: 48px;
+        align-items: center;
+        padding: 56px 0;
+      }
+
+      .hero h1 {
+        max-width: 700px;
+        margin-bottom: 12px;
+        font-size: clamp(3.25rem, 11vw, 6.5rem);
+        line-height: 0.92;
+      }
+
+      .tagline {
+        margin: 0 0 28px;
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+        font-weight: 700;
+      }
+
+      .button {
+        display: inline-block;
+        border: 0;
+        border-radius: 999px;
+        padding: 14px 22px;
+        background: var(--saffron);
+        color: var(--teal);
+        font: 800 1rem system-ui, sans-serif;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .matka-wrap {
+        display: grid;
+        place-items: center;
+        min-height: 340px;
+      }
+
+      .matka {
+        position: relative;
+        width: 230px;
+        height: 250px;
+        border: 10px solid var(--teal);
+        border-radius: 48% 48% 42% 42%;
+        background: var(--saffron);
+        box-shadow: 18px 18px 0 var(--teal);
+      }
+
+      .matka::before {
+        content: "";
+        position: absolute;
+        width: 125px;
+        height: 42px;
+        left: 43px;
+        top: -48px;
+        border: 10px solid var(--teal);
+        border-radius: 50%;
+        background: var(--cream);
+      }
+
+      .matka::after {
+        content: "☕";
+        position: absolute;
+        inset: 62px 0 0;
+        display: grid;
+        place-items: start center;
+        color: var(--teal);
+        font-size: 72px;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+
+      .section-heading {
+        margin-bottom: 28px;
+        font-size: clamp(2rem, 7vw, 3.25rem);
+        text-align: center;
+      }
+
+      .category {
+        margin-top: 42px;
+      }
+
+      .category h3 {
+        margin-bottom: 16px;
+        font-size: 1.5rem;
+      }
+
+      .menu-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .menu-card {
+        min-height: 180px;
+        border: 3px solid var(--teal);
+        border-radius: 24px;
+        padding: 22px;
+        background: var(--cream);
+      }
+
+      .menu-card.featured {
+        border-color: var(--saffron);
+        background: var(--saffron);
+      }
+
+      .menu-icon {
+        display: block;
+        margin-bottom: 18px;
+        font-size: 2.25rem;
+      }
+
+      .menu-card h4 {
+        margin: 0 0 8px;
+        font-family: Georgia, serif;
+        font-size: 1.25rem;
+      }
+
+      .price {
+        display: block;
+        font-weight: 800;
+      }
+
+      .offer {
+        border-block: 3px solid var(--teal);
+        background: var(--teal);
+        color: var(--cream);
+        text-align: center;
+      }
+
+      .offer h2 {
+        color: var(--saffron);
+        margin-bottom: 8px;
+      }
+
+      .offer p {
+        margin: 0;
+        font-size: clamp(1.25rem, 5vw, 2rem);
+        font-weight: 800;
+      }
+
+      .about {
+        text-align: center;
+      }
+
+      .about p {
+        max-width: 680px;
+        margin: 0 auto;
+        font-size: 1.125rem;
+      }
+
+      .order-wrap {
+        max-width: 680px;
+        margin: 0 auto;
+        border: 3px solid var(--teal);
+        border-radius: 24px;
+        padding: 24px;
+      }
+
+      .order-form {
+        display: grid;
+        gap: 16px;
+      }
+
+      label {
+        display: grid;
+        gap: 7px;
+        font-weight: 800;
+      }
+
+      input,
+      select {
+        width: 100%;
+        min-height: 48px;
+        border: 2px solid var(--teal);
+        border-radius: 12px;
+        padding: 10px 12px;
+        background: var(--cream);
+        color: var(--teal);
+        font: 1rem system-ui, sans-serif;
+      }
+
+      .form-message {
+        min-height: 24px;
+        margin: 12px 0 0;
+        font-weight: 800;
+      }
+
+      footer {
+        border-top: 3px solid var(--teal);
+        padding: 28px 0;
+        text-align: center;
+      }
+
+      footer p {
+        margin: 0;
+        font-family: Georgia, serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+
+      @media (min-width: 720px) {
+        .hero-grid {
+          grid-template-columns: 1.2fr 0.8fr;
+        }
+
+        .menu-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .order-form {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .order-form label:last-of-type,
+        .order-form .button,
+        .form-message {
+          grid-column: 1 / -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav" aria-label="Main navigation">
+      <div class="container nav-inner">
+        <a class="nav-brand" href="index.html">Nau Kay Baad</a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Nau Kay Baad</h1>
+          <p class="tagline">Chai for the late hours.</p>
+          <a class="button" href="#menu">See the menu</a>
+        </div>
+        <div class="matka-wrap" aria-label="Masala chai in a clay matka pot">
+          <div class="matka" aria-hidden="true"></div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="menu">
+        <div class="container">
+          <h2 class="section-heading">Menu</h2>
+
+          <div class="category">
+            <h3>Chai</h3>
+            <div class="menu-grid">
+              <article class="menu-card featured">
+                <span class="menu-icon" aria-hidden="true">🫖</span>
+                <h4>Masala Chai</h4>
+                <span class="price">PKR 200</span>
+                <p>Served in a clay matka pot.</p>
+              </article>
+              <article class="menu-card">
+                <span class="menu-icon" aria-hidden="true">☕</span>
+                <h4>Doodh Patti</h4>
+                <span class="price">PKR 200</span>
+              </article>
+              <article class="menu-card">
+                <span class="menu-icon" aria-hidden="true">🌿</span>
+                <h4>Elaichi Chai</h4>
+                <span class="price">PKR 200</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="category">
+            <h3>Snacks</h3>
+            <div class="menu-grid">
+              <article class="menu-card">
+                <span class="menu-icon" aria-hidden="true">🥟</span>
+                <h4>Samosa</h4>
+                <span class="price">PKR 200</span>
+              </article>
+              <article class="menu-card">
+                <span class="menu-icon" aria-hidden="true">🍞</span>
+                <h4>Bun Maska</h4>
+                <span class="price">PKR 200</span>
+              </article>
+              <article class="menu-card">
+                <span class="menu-icon" aria-hidden="true">🍪</span>
+                <h4>Biscuits</h4>
+                <span class="price">PKR 200</span>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="offer" aria-label="Offer">
+        <div class="container">
+          <h2>Tonight's offer</h2>
+          <p>Buy two, get one free after 9 pm</p>
+        </div>
+      </section>
+
+      <section class="about">
+        <div class="container">
+          <h2 class="section-heading">Late-night chai</h2>
+          <p>
+            Nau Kay Baad is a cosy late-night matka chai stall near campus in Lahore,
+            made for warm conversations and late study hours.
+          </p>
+        </div>
+      </section>
+
+      <section id="order">
+        <div class="container order-wrap">
+          <h2 class="section-heading">Place an order</h2>
+          <form class="order-form" id="order-form" novalidate>
+            <label>
+              Your name
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label>
+              Phone number
+              <input
+                type="tel"
+                name="phone"
+                inputmode="numeric"
+                autocomplete="tel"
+                maxlength="11"
+                pattern="[0-9]{11}"
+                placeholder="11 digits"
+                required
+              />
+            </label>
+            <label>
+              Choose an item
+              <select name="item" required>
+                <option value="">Select from the menu</option>
+                <option>Masala Chai</option>
+                <option>Doodh Patti</option>
+                <option>Elaichi Chai</option>
+                <option>Samosa</option>
+                <option>Bun Maska</option>
+                <option>Biscuits</option>
+              </select>
+            </label>
+            <label>
+              Quantity
+              <input type="number" name="quantity" min="1" value="1" required />
+            </label>
+            <button class="button" type="submit">Place order</button>
+            <p class="form-message" id="form-message" role="status"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Nau Kay Baad</p>
+    </footer>
+
+    <script>
+      const form = document.querySelector("#order-form");
+      const phoneInput = form.elements.phone;
+      const message = document.querySelector("#form-message");
+
+      phoneInput.addEventListener("input", () => {
+        phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 11);
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        if (!form.checkValidity()) {
+          message.textContent = "Please complete every field.";
+          return;
+        }
+
+        if (!/^[0-9]{11}$/.test(phoneInput.value)) {
+          message.textContent = "Phone number must have exactly 11 digits.";
+          phoneInput.focus();
+          return;
+        }
+
+        message.textContent = "Your order is ready to place.";
+      });
+    </script>
+  </body>
+</html>
